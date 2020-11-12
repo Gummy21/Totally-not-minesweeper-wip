@@ -1,7 +1,8 @@
 import pygame
 import random
 from pygame.locals import *
-from funcs import *
+from rect_numbers import *
+from hollow_grid import *
 pygame.display.init()
 pygame.font.init()
 
@@ -10,11 +11,14 @@ grey = (128, 128, 128)
 greyer = (220, 220, 220)
 darkgrey = (50, 50, 50)
 black = (0,0,0)
+lgrey = (190,190,190)
+
 x = 0
 y = 50
 w = 400
 h = 360
-ascending = 0
+
+hollow_index_rect = 1
 WIDTH = 105
 HEIGHT = 105
 game_end = False
@@ -55,19 +59,24 @@ class change:
     def changecolor(self):
         rectLeft = self.rect.left
         rectTop = self.rect.top
-        loopbool = True
-        while loopbool is True:
-            check_if_mines(
-            checkXneg = rectLeft - 21,
-            checkXplus = rectLeft + 21,
-            checkYneg = rectTop - 22,
-            checkYplus = rectTop + 22,
-            mines = mines,
-            recttop = rectTop,
-            rectleft = rectLeft,
-            wind = wind
-            )
-            loopbool = False
+        check_if_hollow(
+        rleft = rectLeft,
+        rtop = rectTop,
+        mines = mines,
+        wind = wind,
+        cindex = hollow_index_rect
+        )
+        nums = check_if_mines(
+        checkXneg = rectLeft - 21,
+        checkXplus = rectLeft + 21,
+        checkYneg = rectTop - 22,
+        checkYplus = rectTop + 22,
+        mines = mines,
+        recttop = rectTop,
+        rectleft = rectLeft,
+        wind = wind
+        )
+
 
 
     def foundmine(self):
@@ -97,7 +106,7 @@ class reseter:
         index = 1
         one = 1
         mines.clear()
-       
+        mines.update({3:{'x':44, 'y':50}})
         mines.update(random.sample(rectDict.items(), 50))
         
         
@@ -126,7 +135,7 @@ grid.gamegrid()
 
 
 # // Rect squares
-reset = pygame.draw.rect(wind, Color('red'), [xx, yy, 30, 30])
+reset = pygame.draw.rect(wind,lgrey, [xx, yy, 30, 30])
 
 for re in range(16):
     for rect in range(18):
@@ -150,7 +159,7 @@ clickedRect = pygame.Rect(rectDict[indexRect]['x'],rectDict[indexRect]['y'],rect
 
 pygame.display.flip()
 
-
+mines.update({3:{'x':44, 'y':50}})
 mines.update(random.sample(rectDict.items(), 50))
 
 
@@ -194,6 +203,7 @@ while not game_end:
                     if indexRect in rectDict.keys() and indexRect not in rightclickedrects.keys() and indexRect not in clickedrects.keys():
                         changedRect = clickedRect
                         p1 = change(changedRect)
+                        hollow_index_rect = indexRect
                         print(clickedRect)
                         p1.changecolor()
                         if indexRect not in clickedrects.keys():

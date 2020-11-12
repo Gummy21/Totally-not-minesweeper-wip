@@ -1,14 +1,22 @@
 import pygame
 import itertools
 from pygame.locals import *
+grey = (128, 128, 128)
+greyer = (180, 180, 180)
+
+def zero(xneg,xplus,yneg,yplus,btop,bleft,mined,indexnum1,wind):
+    rect_list = list(itertools.combinations([xneg,xplus,yplus,yneg,bleft,btop],2))
+    for combo in rect_list:      
+        if (        
+            combo[0] in mined.values()
+            and combo[1] in mined.values()
+        ):
+            print("true")
+            return True
+       
 
 def eight(xneg,xplus,yneg,yplus,btop,bleft,mined,indexnum1,wind):
-    xneg3 = xneg
-    yneg2 = yneg
-    yneg3 = yneg
-    xplus3 = xplus
-    yplus2 = yplus
-    yplus3 = yplus
+ 
     rect_list1 = list(itertools.combinations([xneg,xplus,yplus,yneg,bleft,btop],2))
     
     for combo in rect_list1:
@@ -83,12 +91,7 @@ def eight(xneg,xplus,yneg,yplus,btop,bleft,mined,indexnum1,wind):
                 
 
 def seven(xneg,xplus,yneg,yplus,btop,bleft,mined,indexnum1,wind):
-    xneg3 = xneg
-    yneg2 = yneg
-    yneg3 = yneg
-    xplus3 = xplus
-    yplus2 = yplus
-    yplus3 = yplus
+
     rect_list1 = list(itertools.combinations([xneg,xplus,yplus,yneg,bleft,btop],2))
     
     for combo in rect_list1:
@@ -156,12 +159,7 @@ def seven(xneg,xplus,yneg,yplus,btop,bleft,mined,indexnum1,wind):
                                                 
 
 def six(xneg,xplus,yneg,yplus,btop,bleft,mined,indexnum1,wind):
-    xneg3 = xneg
-    yneg2 = yneg
-    yneg3 = yneg
-    xplus3 = xplus
-    yplus2 = yplus
-    yplus3 = yplus
+
     rect_list1 = list(itertools.combinations([xneg,xplus,yplus,yneg,bleft,btop],2))
     
     for combo in rect_list1:
@@ -218,12 +216,7 @@ def six(xneg,xplus,yneg,yplus,btop,bleft,mined,indexnum1,wind):
                                 
 
 def five(xneg,xplus,yneg,yplus,btop,bleft,mined,indexnum1,wind):
-    xneg3 = xneg
-    yneg2 = yneg
-    yneg3 = yneg
-    xplus3 = xplus
-    yplus2 = yplus
-    yplus3 = yplus
+
     rect_list1 = list(itertools.combinations([xneg,xplus,yplus,yneg,bleft,btop],2))
     
     for combo in rect_list1:
@@ -273,12 +266,8 @@ def five(xneg,xplus,yneg,yplus,btop,bleft,mined,indexnum1,wind):
                                               
 
 def four(xneg,xplus,yneg,yplus,btop,bleft,mined,indexnum1,wind):
-    xneg3 = xneg
-    yneg2 = yneg
-    yneg3 = yneg
-    xplus3 = xplus
-    yplus2 = yplus
-    yplus3 = yplus
+
+   
     rect_list1 = list(itertools.combinations([xneg,xplus,yplus,yneg,bleft,btop],2))
     
     for combo in rect_list1:
@@ -321,12 +310,7 @@ def four(xneg,xplus,yneg,yplus,btop,bleft,mined,indexnum1,wind):
                 
 
 def three(xneg,xplus,yneg,yplus,btop,bleft,mined,indexnum1,wind):
-    xneg3 = xneg
-    yneg2 = yneg
-    yneg3 = yneg
-    xplus3 = xplus
-    yplus2 = yplus
-    yplus3 = yplus
+
     rect_list1 = list(itertools.combinations([xneg,xplus,yplus,yneg,bleft,btop],2))
     
     for combo in rect_list1:
@@ -362,12 +346,7 @@ def three(xneg,xplus,yneg,yplus,btop,bleft,mined,indexnum1,wind):
 
 
 def two(xneg,xplus,yneg,yplus,btop,bleft,mined,indexnum1,wind):
-    xneg3 = xneg
-    yneg2 = yneg
-    yneg3 = yneg
-    xplus3 = xplus
-    yplus2 = yplus
-    yplus3 = yplus
+
     rect_list1 = list(itertools.combinations([xneg,xplus,yplus,yneg,bleft,btop],2))
     for indexnum2 in mined.keys():
         for combo in rect_list1:
@@ -389,9 +368,30 @@ def two(xneg,xplus,yneg,yplus,btop,bleft,mined,indexnum1,wind):
                         num = font.render('2',True,Color('Blue'))
                         pygame.display.update(wind.blit(num,[bleft + 5,btop]))
                         return True
+                        break
+
+def one(xneg,xplus,yneg,yplus,btop,bleft,mined,indexnum1,wind):
+    rect_list = list(itertools.combinations([xneg,xplus,yplus,yneg,bleft,btop],2))
+    for combo in rect_list:
+        
+        if (        
+            combo[0] in mined[indexnum1].values()
+            and combo[1] in mined[indexnum1].values()
+        ):
+            
+            font = pygame.font.Font(None,30)
+            num = font.render('1',True,Color('Blue'))
+            pygame.display.update(wind.blit(num,[bleft + 5,btop]))
+            return True
+            break
+
+            
+       
 
 
 
+     
+            
 def check_if_mines(**rects):
     mines = rects.get('mines')
     checkXneg = rects.get('checkXneg')
@@ -403,30 +403,35 @@ def check_if_mines(**rects):
     wind = rects.get('wind')
     for indexrect in mines.keys():
         if (eight(checkXneg,checkXplus,checkYneg,checkYplus,basetop,baseleft,mines,indexrect,wind)):
+            return
             break
         elif (seven(checkXneg,checkXplus,checkYneg,checkYplus,basetop,baseleft,mines,indexrect,wind)):
+            return basetop,baseleft
             break
         elif (six(checkXneg,checkXplus,checkYneg,checkYplus,basetop,baseleft,mines,indexrect,wind)):
+            return basetop,baseleft
             break
         elif (five(checkXneg,checkXplus,checkYneg,checkYplus,basetop,baseleft,mines,indexrect,wind)):
+            return basetop,baseleft
             break
         elif (four(checkXneg,checkXplus,checkYneg,checkYplus,basetop,baseleft,mines,indexrect,wind)):
+            return basetop,baseleft
             break
         elif (three(checkXneg,checkXplus,checkYneg,checkYplus,basetop,baseleft,mines,indexrect,wind)):
+            return basetop,baseleft
             break
         elif (two(checkXneg,checkXplus,checkYneg,checkYplus,basetop,baseleft,mines,indexrect,wind)):
-            break    
-        else:
-            rect_list = list(itertools.combinations([checkXneg,checkXplus,checkYneg,checkYplus,basetop,baseleft],2))
-            for combo in rect_list:      
-                if (        
-                    combo[0] in mines[indexrect].values()
-                    and combo[1] in mines[indexrect].values()
-                ):
-                    font = pygame.font.Font(None,30)
-                    num = font.render('1',True,Color('Blue'))
-                    pygame.display.update(wind.blit(num,[baseleft + 5,basetop]))
-                    break
+            return basetop,baseleft
+            break
+        elif (one(checkXneg,checkXplus,checkYneg,checkYplus,basetop,baseleft,mines,indexrect,wind)): 
+            return basetop,baseleft
+            break
+        elif (zero(checkXneg,checkXplus,checkYneg,checkYplus,basetop,baseleft,mines,indexrect,wind) != True):
+            pygame.display.update(pygame.draw.rect(wind, greyer,[baseleft,basetop,23,23]))
+            pygame.display.update(pygame.draw.rect(wind, [50,50,50],[baseleft,basetop,23,23],1))
+
+            
+            
                     
    
 
