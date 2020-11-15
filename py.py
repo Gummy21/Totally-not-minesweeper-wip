@@ -59,6 +59,7 @@ class change:
     def changecolor(self):
         rectLeft = self.rect.left
         rectTop = self.rect.top
+       
         check_if_hollow(
         rleft = rectLeft,
         rtop = rectTop,
@@ -66,7 +67,7 @@ class change:
         wind = wind,
         cindex = hollow_index_rect
         )
-        nums = check_if_mines(
+        check_if_mines(
         checkXneg = rectLeft - 21,
         checkXplus = rectLeft + 21,
         checkYneg = rectTop - 22,
@@ -106,8 +107,9 @@ class reseter:
         index = 1
         one = 1
         mines.clear()
-        mines.update({3:{'x':44, 'y':50}})
-        mines.update(random.sample(rectDict.items(), 50))
+        mines.update({5:{'x':86, 'y':50}})
+        mines.update({1:{'x':2, 'y':50}})
+        # mines.update(random.sample(rectDict.items(), 50))
         
         
 
@@ -154,13 +156,14 @@ for re in range(16):
     indexnum = indexnum + 1
     pygame.display.flip()
 
-
+print(range(len(rectDict)))
 clickedRect = pygame.Rect(rectDict[indexRect]['x'],rectDict[indexRect]['y'],rectw, recth)
 
 pygame.display.flip()
 
-mines.update({3:{'x':44, 'y':50}})
-mines.update(random.sample(rectDict.items(), 50))
+mines.update({1:{'x':2, 'y':50}})
+mines.update({5:{'x':86, 'y':50}})
+# mines.update(random.sample(rectDict.items(), 1))
 
 
 dictlength = len(clickedrects)
