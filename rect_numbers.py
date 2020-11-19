@@ -1,8 +1,21 @@
 import pygame
 import itertools
+
 from pygame.locals import *
 grey = (128, 128, 128)
 greyer = (180, 180, 180)
+hollowdict = {}
+
+def check_if_hollow_and_mine(hollowdic,minepos):
+    for hollow in hollowdic:
+        if (hollow[0] in minepos.values()
+            and hollow[1] in minepos.values()):
+            print("true")
+            return True
+
+
+
+
 
 def zero(xneg,xplus,yneg,yplus,btop,bleft,mined,indexnum1,wind):
     rect_list = list(itertools.combinations([xneg,xplus,yplus,yneg,bleft,btop],2))
@@ -401,6 +414,9 @@ def check_if_mines(**rects):
     basetop = rects.get('recttop')
     baseleft = rects.get('rectleft')
     wind = rects.get('wind')
+    hollows = rects.get('hollows')
+    hollowdict = hollows
+    print(hollowdict)
     for indexrect in mines.keys():
         if (eight(checkXneg,checkXplus,checkYneg,checkYplus,basetop,baseleft,mines,indexrect,wind)):
             return

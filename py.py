@@ -1,8 +1,8 @@
 import pygame
 import random
 from pygame.locals import *
-from rect_numbers import *
-from hollow_grid import *
+from rect_numbers import check_if_mines
+import hollow_grid
 pygame.display.init()
 pygame.font.init()
 
@@ -60,13 +60,14 @@ class change:
         rectLeft = self.rect.left
         rectTop = self.rect.top
        
-        check_if_hollow(
+        hollows = hollow_grid.check_if_hollow(
         rleft = rectLeft,
         rtop = rectTop,
         mines = mines,
         wind = wind,
         cindex = hollow_index_rect
         )
+       
         check_if_mines(
         checkXneg = rectLeft - 21,
         checkXplus = rectLeft + 21,
@@ -75,7 +76,8 @@ class change:
         mines = mines,
         recttop = rectTop,
         rectleft = rectLeft,
-        wind = wind
+        wind = wind,
+        hollows = hollows
         )
 
 

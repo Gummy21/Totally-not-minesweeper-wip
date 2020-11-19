@@ -7,16 +7,20 @@ hollow_rects = {}
 
 
 def check_if_hollow(rleft,rtop,mines,wind,cindex):
+    hollow_rects.clear()
     for index in mines.keys():
-        check_if_hollowxp(rleft,rtop,mines,index,cindex)
-        check_if_hollowxm(rleft,rtop,mines,index,cindex)
+        
         check_if_hollowyu(rleft,rtop,mines,index,cindex)
         check_if_hollowyd(rleft,rtop,mines,index,cindex)
         for rect in hollow_rects.keys():
             
             pygame.display.update(pygame.draw.rect(wind, (180, 180, 180),[hollow_rects[rect]['x'],hollow_rects[rect]['y'],23,23]))
             pygame.display.update(pygame.draw.rect(wind, [50,50,50],[hollow_rects[rect]['x'],hollow_rects[rect]['y'],23,23],1))
-        hollow_rects.clear()  
+       
+        hollows = hollow_rects
+        
+      
+        return hollows
         break
             
         
@@ -24,7 +28,7 @@ def check_if_hollow(rleft,rtop,mines,wind,cindex):
 
 
 
-def check_if_hollowxp(rleft,rtop,mines,index,cindex):
+def check_if_hollowxp(rleft,rtop,mines,cindex):
     check_if_mine = False
     
     for num in range(304):
@@ -48,6 +52,8 @@ def check_if_hollowxp(rleft,rtop,mines,index,cindex):
             rleft = -19
         rleft += 21
         cindex += 1
+        if cindex > 359:
+            cindex -= 1
                
        
             
@@ -59,7 +65,7 @@ def check_if_hollowxp(rleft,rtop,mines,index,cindex):
        
 
 
-def check_if_hollowxm(rleft,rtop,mines,index,cindex):
+def check_if_hollowxm(rleft,rtop,mines,cindex):
     check_if_mine = False
     
     for num in range(304):
@@ -78,12 +84,14 @@ def check_if_hollowxm(rleft,rtop,mines,index,cindex):
         if (rleft < 2):
             rtop -= 22
             rleft = 359
-        # pass in new rtop to L/R?
+       
         hollow_rects.update({cindex: {'x':rleft,'y':rtop}})
         if check_if_mine:
             break
         rleft -= 21
         cindex -= 1
+        if cindex < 0:
+            cindex += 1
                
       
             
@@ -109,12 +117,17 @@ def check_if_hollowyd(rleft,rtop,mines,index,cindex):
                 break
         if (rtop < 50):
             rtop = 50
-        # pass in new rtop L/R?
+        check_if_hollowxp(rleft,rtop,mines,cindex)
+        check_if_hollowxm(rleft,rtop,mines,cindex)
         hollow_rects.update({cindex: {'x':rleft,'y':rtop}})
         if check_if_mine:
+            check_if_hollowxp(rleft,rtop,mines,cindex)
+            check_if_hollowxm(rleft,rtop,mines,cindex)
             break
         rtop -= 22
         cindex -= 18
+        if cindex < 0:
+            cindex += 18
                
       
             
@@ -141,10 +154,16 @@ def check_if_hollowyu(rleft,rtop,mines,index,cindex):
             rtop = 380
         
         hollow_rects.update({cindex: {'x':rleft,'y':rtop}})
+        check_if_hollowxp(rleft,rtop,mines,cindex)
+        check_if_hollowxm(rleft,rtop,mines,cindex)
         if check_if_mine:
+            check_if_hollowxp(rleft,rtop,mines,cindex)
+            check_if_hollowxm(rleft,rtop,mines,cindex)
             break
         rtop += 22
         cindex += 18
+        if cindex > 359:
+            cindex -=18
                
       
             
