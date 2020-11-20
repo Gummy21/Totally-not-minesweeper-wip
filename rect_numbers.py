@@ -414,9 +414,6 @@ def check_if_mines(**rects):
     basetop = rects.get('recttop')
     baseleft = rects.get('rectleft')
     wind = rects.get('wind')
-    hollows = rects.get('hollows')
-    hollowdict = hollows
-    print(hollowdict)
     for indexrect in mines.keys():
         if (eight(checkXneg,checkXplus,checkYneg,checkYplus,basetop,baseleft,mines,indexrect,wind)):
             return

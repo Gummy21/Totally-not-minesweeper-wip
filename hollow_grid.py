@@ -1,6 +1,6 @@
 import pygame
 from pygame.locals import *
-
+from rect_numbers import check_if_mines
 hollow_rects = {}
 
 
@@ -13,9 +13,23 @@ def check_if_hollow(rleft,rtop,mines,wind,cindex):
         check_if_hollowyu(rleft,rtop,mines,index,cindex)
         check_if_hollowyd(rleft,rtop,mines,index,cindex)
         for rect in hollow_rects.keys():
-            
             pygame.display.update(pygame.draw.rect(wind, (180, 180, 180),[hollow_rects[rect]['x'],hollow_rects[rect]['y'],23,23]))
             pygame.display.update(pygame.draw.rect(wind, [50,50,50],[hollow_rects[rect]['x'],hollow_rects[rect]['y'],23,23],1))
+            recttop = hollow_rects[rect]['y'] 
+            rectleft = hollow_rects[rect]['x']
+            if (check_if_mines(
+            checkXneg = rectleft - 21,
+            checkXplus = rectleft + 21,
+            checkYneg = recttop - 22,
+            checkYplus = recttop + 22,
+            mines = mines,
+            recttop = recttop,
+            rectleft = rectleft,
+            wind = wind,
+            )):
+                pass
+            
+           
        
         hollows = hollow_rects
         
@@ -43,7 +57,7 @@ def check_if_hollowxp(rleft,rtop,mines,cindex):
                 and rtop not in mines[recta].values()):
                     hollow_rects.update({cindex: {'x':rleft,'y':rtop}})
                 check_if_mine = True
-                break
+                return
         hollow_rects.update({cindex: {'x':rleft,'y':rtop}})
         if check_if_mine:
             break
@@ -80,10 +94,10 @@ def check_if_hollowxm(rleft,rtop,mines,cindex):
                 and rtop not in mines[recta].values()):
                     hollow_rects.update({cindex: {'x':rleft,'y':rtop}})
                 check_if_mine = True
-                break
+                return
         if (rleft < 2):
             rtop -= 22
-            rleft = 359
+            rleft = 2
        
         hollow_rects.update({cindex: {'x':rleft,'y':rtop}})
         if check_if_mine:

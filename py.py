@@ -1,7 +1,6 @@
 import pygame
 import random
 from pygame.locals import *
-from rect_numbers import check_if_mines
 import hollow_grid
 pygame.display.init()
 pygame.font.init()
@@ -67,19 +66,7 @@ class change:
         wind = wind,
         cindex = hollow_index_rect
         )
-       
-        check_if_mines(
-        checkXneg = rectLeft - 21,
-        checkXplus = rectLeft + 21,
-        checkYneg = rectTop - 22,
-        checkYplus = rectTop + 22,
-        mines = mines,
-        recttop = rectTop,
-        rectleft = rectLeft,
-        wind = wind,
-        hollows = hollows
-        )
-
+      
 
 
     def foundmine(self):
@@ -109,9 +96,7 @@ class reseter:
         index = 1
         one = 1
         mines.clear()
-        mines.update({5:{'x':86, 'y':50}})
-        mines.update({1:{'x':2, 'y':50}})
-        # mines.update(random.sample(rectDict.items(), 50))
+        mines.update(random.sample(rectDict.items(), 50))
         
         
 
@@ -163,9 +148,8 @@ clickedRect = pygame.Rect(rectDict[indexRect]['x'],rectDict[indexRect]['y'],rect
 
 pygame.display.flip()
 
-mines.update({1:{'x':2, 'y':50}})
-mines.update({5:{'x':86, 'y':50}})
-# mines.update(random.sample(rectDict.items(), 1))
+
+mines.update(random.sample(rectDict.items(), 50))
 
 
 dictlength = len(clickedrects)
