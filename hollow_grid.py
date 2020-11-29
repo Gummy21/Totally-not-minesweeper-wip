@@ -6,12 +6,10 @@ hollow_rects = {}
 
 
 
-def check_if_hollow(rleft,rtop,mines,wind,cindex):
+def check_if_hollow(rleft,rtop,mines,wind,cindex,dictlen):
     hollow_rects.clear()
-    for index in mines.keys():
-        
-        check_if_hollowyu(rleft,rtop,mines,index,cindex)
-        check_if_hollowyd(rleft,rtop,mines,index,cindex)
+    for index in mines:      
+        checker(rleft,rtop,mines,cindex,dictlen)
         for rect in hollow_rects.keys():
             pygame.display.update(pygame.draw.rect(wind, (180, 180, 180),[hollow_rects[rect]['x'],hollow_rects[rect]['y'],23,23]))
             pygame.display.update(pygame.draw.rect(wind, [50,50,50],[hollow_rects[rect]['x'],hollow_rects[rect]['y'],23,23],1))
@@ -42,144 +40,147 @@ def check_if_hollow(rleft,rtop,mines,wind,cindex):
 
 
 
-def check_if_hollowxp(rleft,rtop,mines,cindex):
-    check_if_mine = False
+def checker(rleft,rtop,mines,cindex,dictlen):
+   if top_left(rleft,rtop,mines,cindex,dictlen):
+       pass
+   pass
     
-    for num in range(304):
-        rleftp = rleft + 21
+
+def top_left(rleft,rtop,mines,cindex,dictlen):
+    for num in range(dictlen)
+    rleftp = rleft -= 21
+    rtopp = rtop -= 22
+    cindex = cindex -= 20
+    if (rleftp not in mines[num].values()
+       and rtopp not in mines[num].values()):
+        rleftpp = rleft -= 21
+        rtoppp = rop -= 22
+        if (rleftpp in mines.values()
+           and rtoppp in mines.values()):
+           hollow_rects.update({cindex: {'x':rleftp,'y':rtopp}})
+           return False
+        elif 1 == 1:
+            pass
+
+def top_right(rleft,rtop,mines,cindex,dictlen):
+     for num in range(dictlen)
+    rleftp = rleft += 21
+    rtopp = rtop -= 22
+    cindex = cindex += 1
+    cindex = cindex -= 19
+    if (rleftp not in mines[num].values()
+       and rtopp not in mines[num].values()):
+        rleftpp = rleft += 21
+        rtoppp = rop -= 22
+        if (rleftpp in mines.values()
+           and rtoppp in mines.values()):
+           hollow_rects.update({cindex: {'x':rleftp,'y':rtopp}})
+           return False
+        elif 1 == 1:
+            pass
+
+
+def top(rleft,rtop,mines,cindex,dictlen):
+    for num in range(dictlen)
+    rtopp = rtop -= 22
+    cindex = cindex -= 19
+    if (rleft not in mines[num].values()
+       and rtopp not in mines[num].values()):
         
-        for recta in mines.keys():
-            if (
-                rleftp in mines[recta].values()
-                and rtop in mines[recta].values()
-            ): 
-                if (rleft not in mines[recta].values()
-                and rtop not in mines[recta].values()):
-                    hollow_rects.update({cindex: {'x':rleft,'y':rtop}})
-                check_if_mine = True
-                return
-        hollow_rects.update({cindex: {'x':rleft,'y':rtop}})
-        if check_if_mine:
-            break
-        if (rleft > 379):
-            rtop += 22
-            rleft = -19
-        rleft += 21
-        cindex += 1
-        if cindex > 359:
-            cindex -= 1
-               
-       
-            
-       
-    return True
+        rtoppp = rop -= 22
+        if (rleft in mines.values()
+           and rtoppp in mines.values()):
+           hollow_rects.update({cindex: {'x':rleft,'y':rtopp}})
+           return False
+        elif 1 == 1:
+            pass
 
+
+def mid_left(rleft,rtop,mines,cindex,dictlen):
+     for num in range(dictlen)
+    rleftp = rleft -= 21
+    cindex = cindex -= 1
+    if (rleftp not in mines[num].values()
+       and rtop not in mines[num].values()):
+        rleftpp = rleft -= 21
         
-                
+        if (rleftpp in mines.values()
+           and rtop in mines.values()):
+           hollow_rects.update({cindex: {'x':rleftp,'y':rtop}})
+           return False
+        elif 1 == 1:
+            pass
+
+def mid_right(rleft,rtop,mines,cindex,dictlen):
+     for num in range(dictlen)
+    rleftp = rleft += 21
+   
+    cindex = cindex += 1
+    if (rleftp not in mines[num].values()
+       and rtopp not in mines[num].values()):
+        rleftpp = rleft += 21
        
+        if (rleftpp in mines.values()
+           and rtoppp in mines.values()):
+           hollow_rects.update({cindex: {'x':rleftp,'y':rtop}})
+           return False
+        elif 1 == 1:
+            pass
 
 
-def check_if_hollowxm(rleft,rtop,mines,cindex):
-    check_if_mine = False
+def bot_left(rleft,rtop,mines,cindex,dictlen):
+     for num in range(dictlen)
+    rleftp = rleft -= 21
+    rtopp = rtop += 22
+    cindex = cindex -= 1
+    cindex = cindex += 19
+    if (rleftp not in mines[num].values()
+       and rtopp not in mines[num].values()):
+        rleftpp = rleft -= 21
+        rtoppp = rop += 22
+        if (rleftpp in mines.values()
+           and rtoppp in mines.values()):
+           hollow_rects.update({cindex: {'x':rleftp,'y':rtopp}})
+           return False
+        elif 1 == 1:
+            pass
+
+def bot(rleft,rtop,mines,cindex,dictlen):
+     for num in range(dictlen)
     
-    for num in range(304):
-        rleftm = rleft - 21
-        
-        for recta in mines.keys():
-            if (
-                rleftm in mines[recta].values()
-                and rtop in mines[recta].values()
-            ): 
-                if (rleft not in mines[recta].values()
-                and rtop not in mines[recta].values()):
-                    hollow_rects.update({cindex: {'x':rleft,'y':rtop}})
-                check_if_mine = True
-                return
-        if (rleft < 2):
-            rtop -= 22
-            rleft = 2
-       
-        hollow_rects.update({cindex: {'x':rleft,'y':rtop}})
-        if check_if_mine:
-            break
-        rleft -= 21
-        cindex -= 1
-        if cindex < 0:
-            cindex += 1
-               
+    rtopp = rtop -= 22
+    cindex = cindex += 19
+    if (rleftp not in mines[num].values()
+       and rtopp not in mines[num].values()):
+        rtoppp = rop -= 22
+        if (rleftpp in mines.values()
+           and rtoppp in mines.values()):
+           hollow_rects.update({cindex: {'x':rleft,'y':rtopp}})
+           return False
+        elif 1 == 1:
+            pass
+
+def bot_right(rleft,rtop,mines,cindex,dictlen):
+     for num in range(dictlen)
+    rleftp = rleft += 21
+    rtopp = rtop += 22
+    cindex = cindex += 20
+    if (rleftp not in mines[num].values()
+       and rtopp not in mines[num].values()):
+        rleftpp = rleft += 21
+        rtoppp = rop += 22
+        if (rleftpp in mines.values()
+           and rtoppp in mines.values()):
+           hollow_rects.update({cindex: {'x':rleftp,'y':rtopp}})
+           return False
+        elif 1 == 1:
+            pass
+
+
+
+
       
             
        
-    return True
-
-        
-def check_if_hollowyd(rleft,rtop,mines,index,cindex):
-    check_if_mine = False
     
-    for num in range(304):
-        rtopu = rtop - 22
-        
-        for recta in mines.keys():
-            if (
-                rtopu in mines[recta].values()
-                and rleft in mines[recta].values()
-            ): 
-                if (rleft not in mines[recta].values()
-                and rtop not in mines[recta].values()):
-                    hollow_rects.update({cindex: {'x':rleft,'y':rtop}})
-                check_if_mine = True
-                break
-        if (rtop < 50):
-            rtop = 50
-        check_if_hollowxp(rleft,rtop,mines,cindex)
-        check_if_hollowxm(rleft,rtop,mines,cindex)
-        hollow_rects.update({cindex: {'x':rleft,'y':rtop}})
-        if check_if_mine:
-            check_if_hollowxp(rleft,rtop,mines,cindex)
-            check_if_hollowxm(rleft,rtop,mines,cindex)
-            break
-        rtop -= 22
-        cindex -= 18
-        if cindex < 0:
-            cindex += 18
-               
-      
-            
-       
-    return True
-
-def check_if_hollowyu(rleft,rtop,mines,index,cindex):
-    check_if_mine = False
     
-    for num in range(304):
-        rtopu = rtop + 22
-        
-        for recta in mines.keys():
-            if (
-                rtopu in mines[recta].values()
-                and rleft in mines[recta].values()
-            ): 
-                if (rleft not in mines[recta].values()
-                and rtop not in mines[recta].values()):
-                    hollow_rects.update({cindex: {'x':rleft,'y':rtop}})
-                check_if_mine = True
-                break
-        if (rtop > 380):
-            rtop = 380
-        
-        hollow_rects.update({cindex: {'x':rleft,'y':rtop}})
-        check_if_hollowxp(rleft,rtop,mines,cindex)
-        check_if_hollowxm(rleft,rtop,mines,cindex)
-        if check_if_mine:
-            check_if_hollowxp(rleft,rtop,mines,cindex)
-            check_if_hollowxm(rleft,rtop,mines,cindex)
-            break
-        rtop += 22
-        cindex += 18
-        if cindex > 359:
-            cindex -=18
-               
-      
-            
-       
-    return True

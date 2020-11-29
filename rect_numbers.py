@@ -4,17 +4,7 @@ import itertools
 from pygame.locals import *
 grey = (128, 128, 128)
 greyer = (180, 180, 180)
-hollowdict = {}
-
-def check_if_hollow_and_mine(hollowdic,minepos):
-    for hollow in hollowdic:
-        if (hollow[0] in minepos.values()
-            and hollow[1] in minepos.values()):
-            print("true")
-            return True
-
-
-
+# numbered_rects = {}
 
 
 def zero(xneg,xplus,yneg,yplus,btop,bleft,mined,indexnum1,wind):

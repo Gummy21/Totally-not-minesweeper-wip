@@ -58,13 +58,14 @@ class change:
     def changecolor(self):
         rectLeft = self.rect.left
         rectTop = self.rect.top
-       
+        
         hollows = hollow_grid.check_if_hollow(
         rleft = rectLeft,
         rtop = rectTop,
         mines = mines,
         wind = wind,
-        cindex = hollow_index_rect
+        cindex = hollow_index_rect,
+        dictlen = len(rectDict)
         )
       
 
